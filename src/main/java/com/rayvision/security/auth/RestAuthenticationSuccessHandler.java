@@ -1,5 +1,6 @@
 package com.rayvision.security.auth;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -26,6 +27,7 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest == null) {
             clearAuthenticationAttributes(request);
+            response.getWriter().write(JSON.toJSON(authentication).toString());
             return;
         }
         String targetUrlParam = getTargetUrlParameter();
