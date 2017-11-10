@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/druid/*").permitAll()
                 .antMatchers("/api/foos").authenticated()
                 .and()
                 .formLogin()
