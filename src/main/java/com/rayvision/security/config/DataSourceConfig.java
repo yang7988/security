@@ -22,7 +22,6 @@ public class DataSourceConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setPassword("root");
         return druidDataSource;
     }
 
