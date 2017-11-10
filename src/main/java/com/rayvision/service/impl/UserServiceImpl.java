@@ -6,6 +6,7 @@ import com.rayvision.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +20,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByUserName(String userName) {
-        return userMapper.findByUserName(userName);
+        User user = new User();
+        user.setId(1);
+        user.setUserName("xuyang");
+        user.setPassword("12345678");
+        return user;
+//        return userMapper.findByUserName(userName);
     }
 
     @Override
     public List<String> findRoleByUserName(String userName) {
-        return userMapper.findRoleByUserName(userName);
+        List<String> list = new ArrayList<>();
+        list.add("ADMIN");
+        return list;
+//        return userMapper.findRoleByUserName(userName);
     }
 }
