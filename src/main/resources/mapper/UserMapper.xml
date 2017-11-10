@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rayvision.mapper.UserMapper">
+
+    <sql id="userColumnAlias">
+        id, username userName, password
+    </sql>
+
+    <sql id="condition">
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="userName != null">
+            AND username = #{userName}
+        </if>
+        <if test="password != null">
+            AND password = #{password}
+        </if>
+        
+    </sql>
+
+    <insert id="insertSelective" parameterType="User" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="User">
+        update t_user
+        <set>
+            <if test="userName != null">
+                username = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findByUserName" parameterType="String" resultType="User">
+      select <include refid="userColumnAlias" /> from t_user where username = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findRoleByUserName" parameterType="String" resultType="String">
+        select tr.role_name from  t_user_role tu join t_user tu  r on  tur.user_id = tu.id
+                                                 join t_role tr on tur.role_id = tr.id
+                                                 where tu.username = #{userName,jdbcType=VARCHAR}
+    </select>
+</mapper>
