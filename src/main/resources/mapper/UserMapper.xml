@@ -64,7 +64,7 @@
     </select>
 
     <select id="findRoleByUserName" parameterType="String" resultType="String">
-        select tr.role_name from  t_user_role tu join t_user tu  r on  tur.user_id = tu.id
+        select tr.role_name from  t_user_role tur join t_user tu on  tur.user_id = tu.id
                                                  join t_role tr on tur.role_id = tr.id
                                                  where tu.username = #{userName,jdbcType=VARCHAR}
     </select>
