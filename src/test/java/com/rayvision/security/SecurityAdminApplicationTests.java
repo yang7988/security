@@ -1,6 +1,7 @@
 package com.rayvision.security;
 
 import com.rayvision.SecurityAdminApplication;
+import com.rayvision.controller.HomeController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,17 @@ public class SecurityAdminApplicationTests {
 
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private HomeController homeController;
 
 	@Test
 	public void testDataSource() throws Exception{
 		System.out.println(dataSource.getConnection());
+	}
+
+	@Test
+	public void testController() throws Exception{
+		System.out.println(homeController.foos());
 	}
 
 }
