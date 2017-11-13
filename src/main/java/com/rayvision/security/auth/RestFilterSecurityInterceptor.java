@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by admin on 2017/11/13.
  */
-@Component
+
 public class RestFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
     private FilterInvocationSecurityMetadataSource securityMetadataSource;

@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Created by admin on 2017/11/13.
  */
-@Component
+
 public class RestInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 //    private UrlMatcher urlMatcher = new AntUrlPathMatcher();
