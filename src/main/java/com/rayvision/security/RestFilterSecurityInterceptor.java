@@ -26,13 +26,10 @@ public class RestFilterSecurityInterceptor extends AbstractSecurityInterceptor i
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
+    public void init(FilterConfig filterConfig) throws ServletException {}
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         FilterInvocation fi = new FilterInvocation(request, response, chain);
         invoke(fi);
     }
@@ -49,16 +46,12 @@ public class RestFilterSecurityInterceptor extends AbstractSecurityInterceptor i
         }
     }
 
-
     @Override
-    public void destroy() {
-
-    }
+    public void destroy() {}
 
     @Override
     public Class<?> getSecureObjectClass() {
         return FilterInvocation.class;
-
     }
 
     @Override
