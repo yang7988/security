@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rayvision.mapper.ResourcesMapper">
+
+    <sql id="columnAlias">
+        id, name ,code,pid,scale
+    </sql>
+
+    <sql id="condition">
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="name != null">
+            AND name = #{name}
+        </if>
+        <if test="url != null">
+            AND url = #{url}
+        </if>
+    </sql>
+
+</mapper>
