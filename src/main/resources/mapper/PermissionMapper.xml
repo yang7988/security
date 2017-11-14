@@ -69,6 +69,20 @@
     </insert>
 
     <select id="findPermissionByUserId" parameterType="Integer" resultType="Permission">
-
+        SELECT
+	        tp.*
+        FROM
+	         t_role_permission trp
+        JOIN t_role tre ON trp.role_id = tre.id
+        JOIN t_permission tp ON trp.permission_id = tp.id
+        WHERE
+        tre.id IN
+        (
+		      SELECT tr.id FROM t_user_role tur
+		      JOIN t_user tu ON tur.user_id = tu.id
+		      JOIN t_role tr ON tur.role_id = tr.id
+		      WHERE
+			tu.id = #{userId}
+	     )
     </select>
 </mapper>

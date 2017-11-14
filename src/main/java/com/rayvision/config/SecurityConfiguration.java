@@ -1,8 +1,6 @@
 package com.rayvision.config;
 
-import com.rayvision.security.CustomAuthenticationProvider;
-import com.rayvision.security.RestAuthenticationEntryPoint;
-import com.rayvision.security.RestAuthenticationSuccessHandler;
+import com.rayvision.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 /**
@@ -25,6 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
     @Autowired
     private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
+    @Autowired
+    private RestFilterSecurityInterceptor restFilterSecurityInterceptor;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(customAuthenticationProvider);
@@ -47,5 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .httpBasic();
+        http.addFilterBefore(restFilterSecurityInterceptor, FilterSecurityInterceptor.class);
     }
 }

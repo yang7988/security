@@ -1,5 +1,6 @@
 package com.rayvision.security;
 
+import com.rayvision.domain.Permission;
 import com.rayvision.domain.User;
 import com.rayvision.service.PermissionService;
 import com.rayvision.service.UserService;
@@ -33,13 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户不存在");
         }
         // 读取用户角色列表
-        List<String> roles = userService.findRoleByUserName(userName);
+        List<Permission> permissions = permissionService.findPermissionByUserId(user.getId());
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        if (roles != null && roles.size() > 0)
+        for (Permission permission : permissions)
         {
-            for (String role : roles)
+            if (permission != null && permission.getPermissionName() != null)
             {
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role);
+                GrantedAuthority grantedAuthority = new RestGrantedAuthority(permission.getUrl(), permission.getMethod());
                 authorities.add(grantedAuthority);
             }
         }

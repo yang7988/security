@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 /**
  * Created by admin on 2017/11/13.
  */
+@Component
 public class RestAccessDecisionManager implements AccessDecisionManager {
     //decide 方法是判定是否拥有权限的决策方法
     @Override
