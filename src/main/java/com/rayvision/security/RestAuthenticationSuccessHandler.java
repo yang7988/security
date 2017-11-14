@@ -27,7 +27,8 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest == null) {
             clearAuthenticationAttributes(request);
-            response.getWriter().write(JSON.toJSON(authentication).toString());
+            Object principal = authentication.getPrincipal();
+            response.getWriter().write(JSON.toJSON(principal).toString());
             return;
         }
         String targetUrlParam = getTargetUrlParameter();
