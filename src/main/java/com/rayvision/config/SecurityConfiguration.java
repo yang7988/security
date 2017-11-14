@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/druid/*").permitAll()
-                .antMatchers("/api/foos").authenticated()
+//                .antMatchers("/api/foos").authenticated()
                 .and()
                 .formLogin()
                 .successHandler(restAuthenticationSuccessHandler)
