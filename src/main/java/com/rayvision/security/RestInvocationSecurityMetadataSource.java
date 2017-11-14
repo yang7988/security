@@ -3,7 +3,7 @@ package com.rayvision.security;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Collection;
 /**
  * Created by admin on 2017/11/13.
  */
-@Service
+@Component
 public class RestInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     //此方法是为了判定用户请求的url 是否在权限表中，如果在权限表中，则返回给 decide 方法，用来判定用户是否有此权限。如果不在权限表中则放行。
