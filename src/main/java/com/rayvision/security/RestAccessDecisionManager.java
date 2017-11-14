@@ -25,9 +25,9 @@ public class RestAccessDecisionManager implements AccessDecisionManager {
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         String url, method;
         AntPathRequestMatcher matcher;
-        for (GrantedAuthority ga : authentication.getAuthorities()) {
-            if (ga instanceof RestGrantedAuthority) {
-                RestGrantedAuthority authority = (RestGrantedAuthority) ga;
+        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+            if (grantedAuthority instanceof RestGrantedAuthority) {
+                RestGrantedAuthority authority = (RestGrantedAuthority) grantedAuthority;
                 url = authority.getPermissionUrl();
                 method = authority.getMethod();
                 matcher = new AntPathRequestMatcher(url);
@@ -37,14 +37,14 @@ public class RestAccessDecisionManager implements AccessDecisionManager {
                         return;
                     }
                 }
-            } else if (ga.getAuthority().equals("ROLE_ANONYMOUS")) {//未登录只允许访问 login 页面
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ANONYMOUS")) {//未登录只允许访问 login 页面
                 matcher = new AntPathRequestMatcher("/login");
                 if (matcher.matches(request)) {
                     return;
                 }
             }
         }
-        throw new AccessDeniedException("no right");
+        throw new AccessDeniedException("没有权限");
     }
 
 
