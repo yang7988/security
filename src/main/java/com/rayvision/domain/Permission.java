@@ -1,7 +1,7 @@
 package com.rayvision.domain;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by xuyangyang on 2017/11/14.
  */
 public class Permission {
 

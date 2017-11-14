@@ -5,9 +5,11 @@ import com.rayvision.domain.Permission;
 import java.util.List;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by xuyangyang on 2017/11/14.
  */
 public interface PermissionService {
 
     List<Permission> findPermissionByUserId(Integer userId);
+
+    List<Permission> findAllPermissions();
 }

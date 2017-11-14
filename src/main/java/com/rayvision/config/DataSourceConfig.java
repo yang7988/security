@@ -13,7 +13,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * Created by admin on 2017/11/10.
+ * Created by xuyangyang on 2017/11/10.
  */
 @Configuration
 public class DataSourceConfig {

@@ -3,7 +3,7 @@ package com.rayvision.security;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by xuyangyang on 2017/11/14.
  */
 public class RestGrantedAuthority implements GrantedAuthority {
 

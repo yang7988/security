@@ -12,7 +12,7 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 /**
- * Created by admin on 2017/11/9.
+ * Created by xuyangyang on 2017/11/9.
  */
 @Configuration
 @EnableWebSecurity

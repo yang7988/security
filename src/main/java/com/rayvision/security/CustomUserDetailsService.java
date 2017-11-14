@@ -6,6 +6,7 @@ import com.rayvision.service.PermissionService;
 import com.rayvision.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by admin on 2017/11/9.
+ * Created by xuyangyang on 2017/11/9.
  */
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -39,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         {
             if (permission != null && permission.getPermissionName() != null)
             {
-                GrantedAuthority grantedAuthority = new RestGrantedAuthority(permission.getUrl(), permission.getMethod());
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getPermissionName());
                 authorities.add(grantedAuthority);
             }
         }

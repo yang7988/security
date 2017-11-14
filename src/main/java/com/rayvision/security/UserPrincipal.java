@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by xuyangyang on 2017/11/14.
  */
 public class UserPrincipal extends User{
     private List<String> roles;

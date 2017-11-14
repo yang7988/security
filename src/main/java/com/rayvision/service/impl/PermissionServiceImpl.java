@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by xuyangyang on 2017/11/14.
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
@@ -19,5 +19,10 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public List<Permission> findPermissionByUserId(Integer userId) {
         return permissionMapper.findPermissionByUserId(userId);
+    }
+
+    @Override
+    public List<Permission> findAllPermissions() {
+        return permissionMapper.findAllPermissions();
     }
 }

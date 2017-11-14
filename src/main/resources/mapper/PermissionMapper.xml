@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rayvision.mapper.PermissionMapper">
 
-    <sql id="userColumnAlias">
+    <sql id="columnAlias">
         id, permission_name permissionName,descritpion,url,pid,method
     </sql>
 
@@ -84,5 +84,10 @@
 		      WHERE
 			tu.id = #{userId}
 	     )
+    </select>
+
+
+    <select id="findAllPermissions" resultType="Permission">
+        select <include refid="columnAlias" /> from t_permission
     </select>
 </mapper>

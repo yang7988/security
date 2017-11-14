@@ -12,39 +12,43 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
- * Created by admin on 2017/11/13.
+ * Created by xuyangyang on 2017/11/13.
  */
 @Component
 public class RestAccessDecisionManager implements AccessDecisionManager {
-    //decide 方法是判定是否拥有权限的决策方法
+
+    /**
+     * decide 方法是判定是否拥有权限的决策方法
+     * @param authentication
+     * @param object
+     * @param configAttributes
+     * @throws AccessDeniedException
+     * @throws InsufficientAuthenticationException
+     */
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
-        HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
-        String url, method;
-        AntPathRequestMatcher matcher;
-        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-            if (grantedAuthority instanceof RestGrantedAuthority) {
-                RestGrantedAuthority authority = (RestGrantedAuthority) grantedAuthority;
-                url = authority.getPermissionUrl();
-                method = authority.getMethod();
-                matcher = new AntPathRequestMatcher(url);
-                if (matcher.matches(request)) {
-                    //当权限表权限的method为ALL时表示拥有此路径的所有请求方式权利。
-                    if (method.equals(request.getMethod()) || "ALL".equals(method)) {
-                        return;
-                    }
-                }
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ANONYMOUS")) {//未登录只允许访问 login 页面
-                matcher = new AntPathRequestMatcher("/login");
-                if (matcher.matches(request)) {
+        if(null== configAttributes || configAttributes.size() <=0)
+        {
+            return;
+        }
+        ConfigAttribute attribute;
+        String needPermission;
+        for(Iterator<ConfigAttribute> it = configAttributes.iterator(); it.hasNext(); ) {
+            attribute = it.next();
+            needPermission = attribute.getAttribute();
+            //authentication 为在注释1 中循环添加到 GrantedAuthority 对象中的权限信息集合
+            for(GrantedAuthority authority : authentication.getAuthorities())
+            {
+                if(needPermission.trim().equals(authority.getAuthority())) {
                     return;
                 }
             }
         }
-        throw new AccessDeniedException("没有权限");
+        throw new AccessDeniedException("no right");
     }
 
 
