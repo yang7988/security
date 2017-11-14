@@ -1,4 +1,4 @@
-package com.rayvision.security.auth;
+package com.rayvision.security;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.security.core.Authentication;

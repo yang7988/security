@@ -1,4 +1,4 @@
-package com.rayvision.security.auth;
+package com.rayvision.security;
 
 import com.rayvision.domain.User;
 import com.rayvision.service.UserService;

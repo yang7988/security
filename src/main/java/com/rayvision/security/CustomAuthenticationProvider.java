@@ -1,4 +1,4 @@
-package com.rayvision.security.auth;
+package com.rayvision.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationServiceException;

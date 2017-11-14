@@ -1,4 +1,4 @@
-package com.rayvision.security.config;
+package com.rayvision.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;

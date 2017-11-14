@@ -1,4 +1,4 @@
-package com.rayvision.security.auth;
+package com.rayvision.security;
 
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;

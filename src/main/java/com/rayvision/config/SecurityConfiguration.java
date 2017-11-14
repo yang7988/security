@@ -1,8 +1,8 @@
-package com.rayvision.security.config;
+package com.rayvision.config;
 
-import com.rayvision.security.auth.CustomAuthenticationProvider;
-import com.rayvision.security.auth.RestAuthenticationEntryPoint;
-import com.rayvision.security.auth.RestAuthenticationSuccessHandler;
+import com.rayvision.security.CustomAuthenticationProvider;
+import com.rayvision.security.RestAuthenticationEntryPoint;
+import com.rayvision.security.RestAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

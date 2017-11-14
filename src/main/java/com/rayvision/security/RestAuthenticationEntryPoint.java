@@ -1,4 +1,4 @@
-package com.rayvision.security.auth;
+package com.rayvision.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
