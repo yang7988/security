@@ -1,6 +1,7 @@
 package com.rayvision.security;
 
 import com.rayvision.domain.User;
+import com.rayvision.service.PermissionService;
 import com.rayvision.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,9 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
+    @Autowired
+    private PermissionService permissionService;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserDetails userDetails = null;

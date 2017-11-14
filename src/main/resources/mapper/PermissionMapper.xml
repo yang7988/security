@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rayvision.mapper.PermissionMapper">
+
+    <sql id="userColumnAlias">
+        id, permission_name permissionName,descritpion,url,pid,method
+    </sql>
+
+    <sql id="condition">
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="permissionName != null">
+            AND permission_name = #{permissionName}
+        </if>
+        <if test="url != null">
+            AND url = #{url}
+        </if>
+        <if test="pid != null">
+            AND pid = #{pid}
+        </if>
+        <if test="method != null">
+            AND method = #{method}
+        </if>
+    </sql>
+
+    <insert id="insertSelective" parameterType="Permission" keyProperty="id" useGeneratedKeys="true">
+        insert into t_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="permissionName != null">
+                permission_name,
+            </if>
+            <if test="descritpion != null">
+                descritpion,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="method != null">
+                method
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="permissionName != null">
+                #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="descritpion != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                #{method,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findPermissionByUserId" parameterType="Integer" resultType="Permission">
+
+    </select>
+</mapper>
