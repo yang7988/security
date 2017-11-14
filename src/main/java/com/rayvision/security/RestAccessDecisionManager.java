@@ -20,14 +20,6 @@ import java.util.Iterator;
 @Component
 public class RestAccessDecisionManager implements AccessDecisionManager {
 
-    /**
-     * decide 方法是判定是否拥有权限的决策方法
-     * @param authentication
-     * @param object
-     * @param configAttributes
-     * @throws AccessDeniedException
-     * @throws InsufficientAuthenticationException
-     */
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
@@ -36,22 +28,19 @@ public class RestAccessDecisionManager implements AccessDecisionManager {
             return;
         }
         ConfigAttribute attribute;
-        String needPermission;
+        String requiredAuthority;
         for(Iterator<ConfigAttribute> it = configAttributes.iterator(); it.hasNext(); ) {
             attribute = it.next();
-            needPermission = attribute.getAttribute();
-            //authentication 为在注释1 中循环添加到 GrantedAuthority 对象中的权限信息集合
+            requiredAuthority = attribute.getAttribute();
             for(GrantedAuthority authority : authentication.getAuthorities())
             {
-                if(needPermission.trim().equals(authority.getAuthority())) {
+                if(requiredAuthority.trim().equals(authority.getAuthority())) {
                     return;
                 }
             }
         }
         throw new AccessDeniedException("no right");
     }
-
-
 
     @Override
     public boolean supports(ConfigAttribute attribute) {

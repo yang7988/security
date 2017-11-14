@@ -21,11 +21,11 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
 
     @Autowired
     private PermissionService permissionService;
-    private HashMap<String, Collection<ConfigAttribute>> map =null;
+    private HashMap<String, Collection<ConfigAttribute>> recesourcesMap =null;
 
     public void loadResourceDefine()
     {
-        map = new HashMap<>();
+        recesourcesMap = new HashMap<>();
         Collection<ConfigAttribute> collection;
         ConfigAttribute cfg;
         List<Permission> permissions = permissionService.findAllPermissions();
@@ -33,28 +33,24 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
         {
             collection = new ArrayList<>();
             cfg = new SecurityConfig(permission.getPermissionName());
-            //此处只添加了用户的名字，其实还可以添加更多权限的信息，
-            // 例如请求方法到ConfigAttribute的集合中去。此处添加的信息将会作为MyAccessDecisionManager类的decide的第三个参数。
             collection.add(cfg);
-            //用权限的getUrl() 作为map的key，用ConfigAttribute的集合作为 value，
-            map.put(permission.getUrl(), collection);
+            recesourcesMap.put(permission.getUrl(), collection);
         }
     }
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        if(map ==null) loadResourceDefine();
-        //object 中包含用户请求的request 信息
+        if(recesourcesMap ==null) loadResourceDefine();
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         AntPathRequestMatcher matcher;
         String resUrl;
-        for(Iterator<String> it = map.keySet().iterator(); it.hasNext(); )
+        for(Iterator<String> it = recesourcesMap.keySet().iterator(); it.hasNext(); )
         {
             resUrl = it.next();
             matcher = new AntPathRequestMatcher(resUrl);
             if(matcher.matches(request))
             {
-                return map.get(resUrl);
+                return recesourcesMap.get(resUrl);
             }
         }
         return null;
