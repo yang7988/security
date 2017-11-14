@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserDetails userDetails = null;
+        UserDetails userDetails;
         User user = userService.findUserByUserName(userName);
         if (user == null)
         {
@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         // 读取用户角色列表
         List<Permission> permissions = permissionService.findPermissionByUserId(user.getId());
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         for (Permission permission : permissions)
         {
             if (permission != null && permission.getPermissionName() != null)
