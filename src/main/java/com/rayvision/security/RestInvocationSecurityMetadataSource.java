@@ -32,7 +32,7 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
         for (Permission permission : permissions)
         {
             collection = new ArrayList<>();
-            cfg = new SecurityConfig(permission.getPermissionName());
+            cfg = new SecurityConfig(permission.getName());
             collection.add(cfg);
             recesourcesMap.put(permission.getUrl(), collection);
         }

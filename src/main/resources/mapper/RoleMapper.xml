@@ -44,4 +44,10 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="findRoleByUserId" parameterType="Integer" resultType="Role">
+        select * from t_user_role tur join t_user tu on tur.user_id = tu.id
+                                      join t_role tr on tur.role_id = tr.id
+                                      where tu.id = #{userId}
+    </select>
 </mapper>

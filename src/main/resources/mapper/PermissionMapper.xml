@@ -3,24 +3,18 @@
 <mapper namespace="com.rayvision.mapper.PermissionMapper">
 
     <sql id="columnAlias">
-        id, permission_name permissionName,descritpion,url,pid,method
+        id, name ,descritpion,url
     </sql>
 
     <sql id="condition">
         <if test="id != null">
             AND id = #{id}
         </if>
-        <if test="permissionName != null">
-            AND permission_name = #{permissionName}
+        <if test="name != null">
+            AND name = #{name}
         </if>
         <if test="url != null">
             AND url = #{url}
-        </if>
-        <if test="pid != null">
-            AND pid = #{pid}
-        </if>
-        <if test="method != null">
-            AND method = #{method}
         </if>
     </sql>
 
@@ -30,47 +24,29 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="permissionName != null">
-                permission_name,
+            <if test="name != null">
+                name,
             </if>
             <if test="descritpion != null">
                 descritpion,
-            </if>
-            <if test="url != null">
-                url,
-            </if>
-            <if test="pid != null">
-                pid,
-            </if>
-            <if test="method != null">
-                method
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="permissionName != null">
-                #{permissionName,jdbcType=VARCHAR},
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
             </if>
             <if test="descritpion != null">
-                #{roleName,jdbcType=VARCHAR},
-            </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="pid != null">
-                #{pid,jdbcType=VARCHAR},
-            </if>
-            <if test="method != null">
-                #{method,jdbcType=VARCHAR},
+                #{descritpion,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
     <select id="findPermissionByUserId" parameterType="Integer" resultType="Permission">
         SELECT
-	        tp.id, tp.permission_name permissionName,tp.descritpion,tp.url,tp.pid,tp.method
+	        tp.id, tp.name,tp.descritpion,tp.url
         FROM
 	         t_role_permission trp
         JOIN t_role tre ON trp.role_id = tre.id

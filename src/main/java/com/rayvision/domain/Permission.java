@@ -6,11 +6,9 @@ package com.rayvision.domain;
 public class Permission {
 
     private Integer id;
-    private Integer pid;
-    private String permissionName;
+    private String name;
     private String descritpion;
     private String url;
-    private String method;
 
     public Integer getId() {
         return id;
@@ -20,20 +18,12 @@ public class Permission {
         this.id = id;
     }
 
-    public Integer getPid() {
-        return pid;
+    public String getName() {
+        return name;
     }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescritpion() {
@@ -50,13 +40,5 @@ public class Permission {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
     }
 }
