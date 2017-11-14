@@ -11,5 +11,7 @@ public interface PermissionService {
 
     List<Permission> findPermissionByUserId(Integer userId);
 
+    List<Permission> findPermissionByRoleId(Integer roleId);
+
     List<Permission> findAllPermissions();
 }

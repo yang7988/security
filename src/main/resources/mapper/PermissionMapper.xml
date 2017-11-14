@@ -66,4 +66,15 @@
     <select id="findAllPermissions" resultType="Permission">
         select <include refid="columnAlias" /> from t_permission
     </select>
+
+    <select id="findPermissionByRoleId" parameterType="Integer" resultType="Permission">
+         SELECT
+	        tp.id, tp.name,tp.descritpion,tp.url
+        FROM
+	         t_role_permission trp
+        JOIN t_role tre ON trp.role_id = tre.id
+        JOIN t_permission tp ON trp.permission_id = tp.id
+        WHERE
+            tre.id = #{roleId}
+    </select>
 </mapper>

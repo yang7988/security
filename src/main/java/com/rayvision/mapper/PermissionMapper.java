@@ -15,4 +15,6 @@ public interface PermissionMapper {
     List<Permission> findPermissionByUserId(Integer userId);
 
     List<Permission> findAllPermissions();
+
+    List<Permission> findPermissionByRoleId(Integer roleId);
 }

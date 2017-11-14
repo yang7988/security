@@ -7,32 +7,27 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class RestGrantedAuthority implements GrantedAuthority {
 
-    private String url;
-    private String method;
+    private String resCode;
+    private String permCode;
 
-    public String getPermissionUrl() {
-        return url;
+    public String getResCode() {
+        return resCode;
     }
 
-    public void setPermissionUrl(String permissionUrl) {
-        this.url = permissionUrl;
+    public void setResCode(String resCode) {
+        this.resCode = resCode;
     }
 
-    public String getMethod() {
-        return method;
+    public String getPermCode() {
+        return permCode;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public RestGrantedAuthority(String url, String method) {
-        this.url = url;
-        this.method = method;
+    public void setPermCode(String permCode) {
+        this.permCode = permCode;
     }
 
     @Override
     public String getAuthority() {
-        return this.url + ";" + this.method;
+        return this.resCode.concat(":").concat(this.permCode);
     }
 }
