@@ -1,9 +1,11 @@
 package com.rayvision.security;
 
 import com.rayvision.domain.Permission;
+import com.rayvision.domain.Resources;
 import com.rayvision.domain.Role;
 import com.rayvision.domain.User;
 import com.rayvision.service.PermissionService;
+import com.rayvision.service.ResourcesService;
 import com.rayvision.service.RoleService;
 import com.rayvision.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by xuyangyang on 2017/11/9.
@@ -28,27 +32,32 @@ public class CustomUserDetailsService implements UserDetailsService {
     private PermissionService permissionService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ResourcesService resourcesService;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserDetails userDetails;
         User user = userService.findUserByUserName(userName);
-        if (user == null)
-        {
-            throw new UsernameNotFoundException("用户不存在");
-        }
+        if (user == null) throw new UsernameNotFoundException("用户不存在");
         List<Role> roles = roleService.findRoleByUserId(user.getId());
         // 读取用户角色列表
         List<Permission> permissions = permissionService.findPermissionByUserId(user.getId());
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        List<Resources> availableResources = new ArrayList<>();
         for (Permission permission : permissions)
         {
-            if (permission != null && permission.getName() != null)
+            List<Resources> resources = resourcesService.findResourcesByPermissionId(permission.getId());
+            if (resources != null && resources.size() > 0)
             {
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getName());
-                authorities.add(grantedAuthority);
+                for (Resources resource : resources)
+                {
+                    GrantedAuthority grantedAuthority = new RestGrantedAuthority(resource.getCode(), permission.getName());
+                    authorities.add(grantedAuthority);
+                }
+                availableResources.addAll(resources);
             }
         }
-        userDetails = new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),authorities);
+        userDetails = new UserPrincipal(user.getUserName(), user.getPassword(), authorities, availableResources);
         return userDetails;
     }
 }

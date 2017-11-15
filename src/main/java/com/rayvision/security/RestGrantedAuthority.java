@@ -10,6 +10,14 @@ public class RestGrantedAuthority implements GrantedAuthority {
     private String resCode;
     private String permCode;
 
+    public RestGrantedAuthority() {
+    }
+
+    public RestGrantedAuthority(String resCode, String permCode) {
+        this.resCode = resCode;
+        this.permCode = permCode;
+    }
+
     public String getResCode() {
         return resCode;
     }
