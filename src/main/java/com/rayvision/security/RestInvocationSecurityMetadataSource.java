@@ -2,6 +2,7 @@ package com.rayvision.security;
 
 import com.rayvision.domain.Permission;
 import com.rayvision.service.PermissionService;
+import com.rayvision.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -20,7 +21,7 @@ import java.util.*;
 public class RestInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     @Autowired
-    private PermissionService permissionService;
+    private ResourcesService resourcesService;
     private HashMap<String, Collection<ConfigAttribute>> recesourcesMap =null;
 
     public void loadResourceDefine()
@@ -28,13 +29,16 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
         recesourcesMap = new HashMap<>();
         Collection<ConfigAttribute> collection;
         ConfigAttribute cfg;
-        List<Permission> permissions = permissionService.findAllPermissions();
-        for (Permission permission : permissions)
+        List<GrantedResources> grantedResources = resourcesService.findGrantedResources();
+        for (GrantedResources grantedResource : grantedResources)
         {
             collection = new ArrayList<>();
-            cfg = new SecurityConfig(permission.getName());
+            cfg = new SecurityConfig(grantedResource.getPermission());
             collection.add(cfg);
-            recesourcesMap.put(permission.getUrl(), collection);
+            if(grantedResource.getUrl() != null && !grantedResource.getUrl().trim().equalsIgnoreCase(""))
+            {
+                recesourcesMap.put(grantedResource.getUrl(), collection);
+            }
         }
     }
 
@@ -44,7 +48,7 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         AntPathRequestMatcher matcher;
         String resUrl;
-        for(Iterator<String> it = recesourcesMap.keySet().iterator(); it.hasNext(); )
+        for(Iterator<String> it = recesourcesMap.keySet().iterator(); it.hasNext();)
         {
             resUrl = it.next();
             matcher = new AntPathRequestMatcher(resUrl);

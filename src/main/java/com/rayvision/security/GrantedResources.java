@@ -1,15 +1,16 @@
-package com.rayvision.domain;
+package com.rayvision.security;
 
 /**
- * Created by admin on 2017/11/14.
+ * Created by admin on 2017/11/15.
  */
-public class Resources {
+public class GrantedResources {
     private Integer id;
     private String name;
     private String code;
     private Integer pid;
     private Integer scale;
     private String url;
+    private String permission;
 
     public Integer getId() {
         return id;
@@ -57,5 +58,13 @@ public class Resources {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }

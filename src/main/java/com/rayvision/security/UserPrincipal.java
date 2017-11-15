@@ -1,5 +1,6 @@
 package com.rayvision.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rayvision.domain.Resources;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,11 +15,17 @@ import java.util.Set;
  */
 public class UserPrincipal implements UserDetails,Serializable {
 
+    //用户名
     private String username;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private boolean accountNonExpired;
+    @JsonIgnore
     private boolean accountNonLocked;
+    @JsonIgnore
     private boolean credentialsNonExpired;
+    @JsonIgnore
     private boolean enabled;
     private Set<GrantedAuthority> authorities;
     private List<Resources> resources;

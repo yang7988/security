@@ -1,6 +1,7 @@
 package com.rayvision.mapper;
 
 import com.rayvision.domain.Resources;
+import com.rayvision.security.GrantedResources;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface ResourcesMapper {
 
     List<Resources> findResourcesByPermissionId(Integer userId);
 
-    List<Resources> findAllResources();
+    List<GrantedResources> findGrantedResources();
 }

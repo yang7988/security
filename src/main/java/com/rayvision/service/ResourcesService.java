@@ -1,6 +1,7 @@
 package com.rayvision.service;
 
 import com.rayvision.domain.Resources;
+import com.rayvision.security.GrantedResources;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface ResourcesService {
 
     public List<Resources> findResourcesByPermissionId(Integer permissionId);
+
+    public List<GrantedResources> findGrantedResources();
 }
