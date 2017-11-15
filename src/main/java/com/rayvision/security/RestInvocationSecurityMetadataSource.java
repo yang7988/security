@@ -1,7 +1,5 @@
 package com.rayvision.security;
 
-import com.rayvision.domain.Permission;
-import com.rayvision.service.PermissionService;
 import com.rayvision.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -27,18 +25,15 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
     public void loadResourceDefine()
     {
         recesourcesMap = new HashMap<>();
-        Collection<ConfigAttribute> collection;
         ConfigAttribute cfg;
+        Collection<ConfigAttribute> collection = new ArrayList<>();
         List<GrantedResources> grantedResources = resourcesService.findGrantedResources();
-        collection = new ArrayList<>();
         for (GrantedResources grantedResource : grantedResources)
         {
-            if(grantedResource.getUrl() != null && !grantedResource.getUrl().trim().equalsIgnoreCase(""))
-            {
-                cfg = new SecurityConfig(grantedResource.getPermission());
-                collection.add(cfg);
-                recesourcesMap.put(grantedResource.getUrl(), collection);
-            }
+            if (!recesourcesMap.containsKey(grantedResource.getUrl())) collection = new ArrayList<>();
+            cfg = new SecurityConfig(grantedResource.getPermission());
+            collection.add(cfg);
+            recesourcesMap.put(grantedResource.getUrl(), collection);
         }
     }
 

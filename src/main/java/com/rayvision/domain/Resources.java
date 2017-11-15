@@ -8,6 +8,7 @@ public class Resources {
     private String name;
     private String code;
     private Integer pid;
+    private Integer type;
     private Integer scale;
     private String url;
 
@@ -41,6 +42,14 @@ public class Resources {
 
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getScale() {

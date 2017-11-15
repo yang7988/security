@@ -21,4 +21,10 @@ public class HomeController {
         UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userPrincipal;
     }
+
+    @GetMapping(value = "/modify")
+    public Object modify() {
+        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userPrincipal;
+    }
  }

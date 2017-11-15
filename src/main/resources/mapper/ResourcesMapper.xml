@@ -3,7 +3,7 @@
 <mapper namespace="com.rayvision.mapper.ResourcesMapper">
 
     <sql id="columnAlias">
-        id, name ,code,pid,scale,url
+        id, name ,code,pid,type,scale,url
     </sql>
 
     <sql id="condition">
@@ -20,7 +20,7 @@
 
     <select id="findResourcesByPermissionId" parameterType="Integer" resultType="Resources">
         select
-        tr.id, tr.name ,tr.code,tr.pid,tr.scale,tr.url
+        tr.id, tr.name ,tr.code,tr.pid,tr.type,tr.scale,tr.url
         from t_permission_resources tpr join t_permission tp on tpr.permission_id = tp.id
         join t_resources tr on tpr.resources_id = tr.id
         where tp.id = #{permissionId}
@@ -28,9 +28,9 @@
 
     <select id="findGrantedResources" parameterType="Integer" resultType="com.rayvision.security.GrantedResources">
         select
-        tr.id, tr.name ,tr.code,tr.pid,tr.scale,tr.url,concat(tr.url,':',tp.name) permission
+        tr.id, tr.name ,tr.code,tr.pid,tr.type,tr.scale,tr.url,tp.name permission
         from t_permission_resources tpr join t_permission tp on tpr.permission_id = tp.id
         join t_resources tr on tpr.resources_id = tr.id
-        where tr.url != ''
+        where tr.type = 2
     </select>
 </mapper>

@@ -8,6 +8,7 @@ public class GrantedResources {
     private String name;
     private String code;
     private Integer pid;
+    private Integer type;
     private Integer scale;
     private String url;
     private String permission;
@@ -42,6 +43,14 @@ public class GrantedResources {
 
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getScale() {

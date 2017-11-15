@@ -8,11 +8,14 @@ import org.springframework.security.core.GrantedAuthority;
 public class RestGrantedAuthority implements GrantedAuthority {
 
     private String resUrl;
-    private String permCode;
+    private String authority;
 
-    public RestGrantedAuthority(String resUrl, String permCode) {
+    public RestGrantedAuthority() {
+    }
+
+    public RestGrantedAuthority(String resUrl, String authority) {
         this.resUrl = resUrl;
-        this.permCode = permCode;
+        this.authority = authority;
     }
 
     public String getResUrl() {
@@ -23,16 +26,12 @@ public class RestGrantedAuthority implements GrantedAuthority {
         this.resUrl = resUrl;
     }
 
-    public String getPermCode() {
-        return permCode;
-    }
-
-    public void setPermCode(String permCode) {
-        this.permCode = permCode;
-    }
-
     @Override
     public String getAuthority() {
-        return this.resUrl.concat(":").concat(this.permCode);
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }

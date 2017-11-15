@@ -51,8 +51,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             {
                 for (Resources resource : resources)
                 {
-                    if(resource.getUrl() != null && !resource.getUrl().trim().equalsIgnoreCase("")) {
-                        GrantedAuthority grantedAuthority = new RestGrantedAuthority(resource.getUrl(), permission.getName());
+                    if(ResourceEnum.DYNAMIC.getType().equals(resource.getType()))
+                    {
+                        GrantedAuthority grantedAuthority = new RestGrantedAuthority(resource.getUrl(),permission.getName());
                         authorities.add(grantedAuthority);
                     }
                 }
