@@ -34,7 +34,8 @@ public class RestAccessDecisionManager implements AccessDecisionManager {
             requiredAuthority = attribute.getAttribute();
             for(GrantedAuthority authority : authentication.getAuthorities())
             {
-                if(requiredAuthority.trim().equals(authority.getAuthority())) {
+                String auth = authority.getAuthority();
+                if(requiredAuthority.trim().equals(auth)) {
                     return;
                 }
             }
