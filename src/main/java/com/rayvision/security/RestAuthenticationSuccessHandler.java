@@ -28,8 +28,8 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         if (savedRequest == null) {
             clearAuthenticationAttributes(request);
             Object principal = authentication.getPrincipal();
-            String json = new String(JSON.toJSON(principal).toString().getBytes(), "UTF-8");
-            response.getWriter().write(json);
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write(JSON.toJSON(principal).toString());
             return;
         }
         String targetUrlParam = getTargetUrlParameter();
