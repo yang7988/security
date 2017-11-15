@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping(value = "/api")
 public class HomeController {
 
-    @GetMapping(value = "/foos")
+    @GetMapping(value = "/user")
     public Object foos() {
         Map<String,Object> foo = new HashMap<String,Object>();
         foo.put("id", 0);
