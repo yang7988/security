@@ -6,6 +6,8 @@ package com.rayvision.domain;
 public class Permission {
 
     private Integer id;
+    private Integer resourcesId;
+    private Integer type;
     private String name;
     private String descritpion;
 
@@ -15,6 +17,22 @@ public class Permission {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getResourcesId() {
+        return resourcesId;
+    }
+
+    public void setResourcesId(Integer resourcesId) {
+        this.resourcesId = resourcesId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getName() {

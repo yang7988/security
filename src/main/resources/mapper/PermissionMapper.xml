@@ -3,7 +3,7 @@
 <mapper namespace="com.rayvision.mapper.PermissionMapper">
 
     <sql id="columnAlias">
-        id, name ,descritpion
+        id, tp.resources_id resourcesId,type,name ,descritpion
     </sql>
 
     <sql id="condition">
@@ -43,7 +43,7 @@
 
     <select id="findPermissionByUserId" parameterType="Integer" resultType="Permission">
         SELECT
-	        tp.id, tp.name,tp.descritpion
+	        tp.id, tp.resources_id resourcesId,tp.type,tp.name,tp.descritpion
         FROM
 	         t_role_permission trp
         JOIN t_role tre ON trp.role_id = tre.id
