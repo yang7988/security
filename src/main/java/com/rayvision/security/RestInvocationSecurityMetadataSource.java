@@ -28,13 +28,13 @@ public class RestInvocationSecurityMetadataSource implements FilterInvocationSec
         ConfigAttribute cfg;
         Collection<ConfigAttribute> collection = new ArrayList<>();
         List<GrantedResources> grantedResources = resourcesService.findGrantedResources();
-        for (GrantedResources grantedResource : grantedResources)
+        /*for (GrantedResources grantedResource : grantedResources)
         {
             if (!recesourcesMap.containsKey(grantedResource.getUrl())) collection = new ArrayList<>();
             cfg = new SecurityConfig(grantedResource.getPermission());
             collection.add(cfg);
             recesourcesMap.put(grantedResource.getUrl(), collection);
-        }
+        }*/
     }
 
     @Override
