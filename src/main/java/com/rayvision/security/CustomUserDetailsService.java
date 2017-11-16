@@ -51,7 +51,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             {
                 for (Resources resource : resources)
                 {
-                    GrantedAuthority grantedAuthority = new RestGrantedAuthority(resource.getUrl(), permission.getName());
+                    GrantedAuthority grantedAuthority = new RestGrantedAuthority(resource.getName(), permission.getName());
                     authorities.add(grantedAuthority);
                 }
                 availableResources.addAll(resources);

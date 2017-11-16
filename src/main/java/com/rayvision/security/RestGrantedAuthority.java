@@ -7,23 +7,23 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class RestGrantedAuthority implements GrantedAuthority {
 
-    private String resUrl;
+    private String resName;
     private String authority;
 
     public RestGrantedAuthority() {
     }
 
-    public RestGrantedAuthority(String resUrl, String authority) {
-        this.resUrl = resUrl;
+    public RestGrantedAuthority(String resName, String authority) {
+        this.resName = resName;
         this.authority = authority;
     }
 
-    public String getResUrl() {
-        return resUrl;
+    public String getResName() {
+        return resName;
     }
 
-    public void setResUrl(String resUrl) {
-        this.resUrl = resUrl;
+    public void setResName(String resName) {
+        this.resName = resName;
     }
 
     @Override
