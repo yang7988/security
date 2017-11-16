@@ -8,7 +8,6 @@ public class Permission {
     private Integer id;
     private String name;
     private String descritpion;
-    private String url;
 
     public Integer getId() {
         return id;
@@ -32,13 +31,5 @@ public class Permission {
 
     public void setDescritpion(String descritpion) {
         this.descritpion = descritpion;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.rayvision.mapper.PermissionMapper">
 
     <sql id="columnAlias">
-        id, name ,descritpion,url
+        id, name ,descritpion
     </sql>
 
     <sql id="condition">
@@ -12,9 +12,6 @@
         </if>
         <if test="name != null">
             AND name = #{name}
-        </if>
-        <if test="url != null">
-            AND url = #{url}
         </if>
     </sql>
 
@@ -46,7 +43,7 @@
 
     <select id="findPermissionByUserId" parameterType="Integer" resultType="Permission">
         SELECT
-	        tp.id, tp.name,tp.descritpion,tp.url
+	        tp.id, tp.name,tp.descritpion
         FROM
 	         t_role_permission trp
         JOIN t_role tre ON trp.role_id = tre.id
@@ -69,7 +66,7 @@
 
     <select id="findPermissionByRoleId" parameterType="Integer" resultType="Permission">
          SELECT
-	        tp.id, tp.name,tp.descritpion,tp.url
+	        tp.id, tp.name,tp.descritpion
         FROM
 	         t_role_permission trp
         JOIN t_role tre ON trp.role_id = tre.id
